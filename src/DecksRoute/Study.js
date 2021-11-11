@@ -2,7 +2,7 @@ import { Link, useHistory } from "react-router-dom"
 import { useState, useEffect } from "react"
 import React from "react"
 
-export default function Study({deck, cards}){
+function Study({deck, cards}){
     
     const history = useHistory();
     const [index, setIndex] = useState(1);
@@ -12,11 +12,11 @@ export default function Study({deck, cards}){
 
 
     useEffect(() =>{
-        const curCard = cards[index-1]
+        const currentCard = cards[index-1]
         if(!flipped){
-            setText(curCard?.front)
+            setText(currentCard?.front)
         }else{
-            setText(curCard?.back)
+            setText(currentCard?.back)
         }
     },[flipped,index, flipCount, cards])
 
@@ -86,3 +86,4 @@ export default function Study({deck, cards}){
         </>
     )
 }
+export default Study

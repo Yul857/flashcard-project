@@ -2,7 +2,7 @@ import { Link, useParams, useHistory } from "react-router-dom"
 import React, {useState, useEffect} from "react"
 import { updateDeck, readDeck } from "../utils/api";
 
-export default function Edit(){
+function EditDeck(){
 
     const history = useHistory();
     const {deckId} = useParams();
@@ -14,6 +14,7 @@ export default function Edit(){
     }
 
     const [form, setForm] = useState(newForm)
+    //rerender the readDeck function when the deckId changed 
     useEffect(() => {
         async function getDeck(){
             const response = await readDeck(deckId);
@@ -23,10 +24,9 @@ export default function Edit(){
     },[deckId])
     
     const handleChange = ({ target }) => {
-        const value = target.type === "checkbox" ? target.checked : target.value;
         setForm({
             ...form,
-            [target.name]: value,
+            [target.name]: target.value,
         });
     };
     
@@ -40,7 +40,7 @@ export default function Edit(){
         history.push(`/decks/${savedDeck.id}`)
         
     }
-
+    //The EditDeck screen has the "breadcrumb" at top, "Edit Deck" text, the form of Name and Description, cancel and submit button
     return (
         <>
             <nav aria-label="breadcrumb">
@@ -70,9 +70,9 @@ export default function Edit(){
                         className="form-control" 
                         id="description" 
                         name="description" 
-                        placeholder="Brief description of the deck." 
+                        placeholder="Describe the deck." 
                         value={form.description}
-                        rows="3" 
+                        rows="4" 
                         required 
                         onChange={handleChange} ></textarea>
                 </div>
@@ -82,3 +82,5 @@ export default function Edit(){
         </>
     )
 }
+
+export default EditDeck

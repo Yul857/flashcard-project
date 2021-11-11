@@ -6,7 +6,7 @@ import DeckComponent from "../Home/DeckComponent"
 import CardList from "./CardList";
 import Study from "./Study";
 
-function Decks(){
+function Deck(){
     
     const [deck,setDeck] = useState({cards:[]})
     const {deckId} = useParams();
@@ -44,4 +44,4 @@ function Decks(){
         </Switch>
     )
 }
-export default Decks
+export default Deck

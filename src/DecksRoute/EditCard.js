@@ -2,18 +2,14 @@ import { Link, useParams } from "react-router-dom"
 import { useHistory } from "react-router"
 import React, {useState, useEffect} from "react"
 import { readCard, readDeck } from "../utils/api";
-import Form from "./Form";
+import CardForm from "./CardForm";
 
 export default function EditCard(){
     
     const history = useHistory();
     const {deckId, cardId} = useParams();
     const [deck, setDeck] = useState({name:"",id:0, description:""})
-    const newForm = {
-        front: "",
-        back: ""
-    }
-    const [form, setForm] = useState(newForm)
+    const [form, setForm] = useState( {front: "", back: ""})
 
 
     useEffect(() => {
@@ -25,7 +21,8 @@ export default function EditCard(){
         }
         getDeck();
     },[deckId, cardId])
-    
+
+    //The EditCard screen has the breadcrumb compoonent, the "Edit Card" text and the CardForm component
     return (
         <>
             <nav aria-label="breadcrumb">
@@ -36,7 +33,7 @@ export default function EditCard(){
                 </ol>
             </nav>
             <h2>Edit Card</h2>
-            <Form cardId={cardId} deckId={deckId}/>
+            <CardForm cardId={cardId} deckId={deckId}/>
         </>
     )
 }

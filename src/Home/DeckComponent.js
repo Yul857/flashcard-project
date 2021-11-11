@@ -2,7 +2,6 @@
 import { Link, Switch, Route, useHistory } from "react-router-dom"
 import React from "react"
 import { deleteDeck } from "../utils/api"
-import Edit from "../DecksRoute/Edit";
 
 function DeckComponent({deck, handleDelete}){
     

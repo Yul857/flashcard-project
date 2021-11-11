@@ -2,9 +2,9 @@ import { Link, useParams } from "react-router-dom"
 import { useHistory } from "react-router"
 import React, {useState, useEffect} from "react"
 import { readDeck } from "../utils/api";
-import Form from "./Form";
+import CardForm from "./CardForm";
 
-export default function NewCard(){
+function AddCard(){
 
     const history = useHistory();
     const {deckId} = useParams();
@@ -28,7 +28,9 @@ export default function NewCard(){
                 </ol>
             </nav>
             <h2>{deck.name}: Add Card</h2>
-            <Form cardId={0} deckId={deckId}/>
+            <CardForm cardId={0} deckId={deckId}/>
         </>
     )
 }
+
+export default AddCard

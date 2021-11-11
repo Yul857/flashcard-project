@@ -3,14 +3,11 @@ import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
 import { readCard, readDeck, updateCard, createCard } from "../utils/api";
 
-export default function Form({cardId, deckId}){
+function CardForm({cardId, deckId}){
+    //The EditCard and AddCard share the same format of CardForm
     
     const history = useHistory();
-    const newForm = {
-        front: "",
-        back: ""
-    }
-    const [form, setForm] = useState(newForm)
+    const [form, setForm] = useState({front: "",back: ""})
     const [deck, setDeck] = useState({name:"",id:0, description:""})
 
     useEffect(() => {
@@ -26,18 +23,17 @@ export default function Form({cardId, deckId}){
     },[deckId, cardId])
 
     const handleChange = ({ target }) => {
-        console.log(form)
-        const value = target.value;
         setForm({
             ...form,
-            [target.name]: value,
+            [target.name]: target.value,
         });
     };
     
     const handleCancel = () => {
+        //route to the "/decks/:deckId" path
         history.push(`/decks/${deckId}`)
     }
-    
+    //When press the submit button, update the card
     const handleSubmit = async(event) => {
         event.preventDefault();
         try{
@@ -59,7 +55,7 @@ export default function Form({cardId, deckId}){
                 name="front" 
                 value={form.front}
                 placeholder="Front side of card"
-                rows="3" 
+                rows="4" 
                 required 
                 onChange={handleChange} />
         </div>
@@ -71,7 +67,7 @@ export default function Form({cardId, deckId}){
                 name="back" 
                 value={form.back}
                 placeholder="Back side of card" 
-                rows="3" 
+                rows="4" 
                 required 
                 onChange={handleChange} />
         </div>
@@ -80,3 +76,5 @@ export default function Form({cardId, deckId}){
     </form>
     )
 }
+
+export default CardForm

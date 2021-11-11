@@ -3,7 +3,7 @@ import { useHistory } from "react-router"
 import React, {useState} from "react"
 import { createDeck } from "../utils/api";
 
-export default function NewDeck(){
+function CreateDeck(){
     
     const history = useHistory();
     
@@ -14,10 +14,9 @@ export default function NewDeck(){
     const [form, setForm] = useState(newForm)
     
     const handleChange = ({ target }) => {
-        const value = target.type === "checkbox" ? target.checked : target.value;
         setForm({
             ...form,
-            [target.name]: value,
+            [target.name]: target.value,
         });
     };
     
@@ -73,3 +72,5 @@ export default function NewDeck(){
         </>
     )
 }
+
+export default CreateDeck
